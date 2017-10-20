@@ -60,8 +60,6 @@ class DynamicTypeChecker {
       } 
     })
 
-    console.log(getPrefix+name)
-
     if(data)
       if(getPrefix)
         this[getPrefix+name] = data
