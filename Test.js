@@ -71,7 +71,22 @@ man.setShow = function(){
   console.log(this.getName, this.getAge);
 }
 man.show();
+// 에러 테스트, 아래 주석 제거하면 에러를 반환해야함.
 // man.setShow = 1
+
+man.setType("methodisAdult", Function, function(){
+  if(this.getAge > 19)
+    return true;
+  return false;
+});
+// console.log(man);
+if(man.isAdult())
+  console.log("성인");
+else
+  console.log("미성년자");
+// 에러 테스트, 아래 주석 제거하면 에러를 반환해야함.
+// man.setIsAdult= "성인인가봄"
+
 
 // 상속 받은 참조 자료형 Developer로 선언됨
 class Developer extends Man {

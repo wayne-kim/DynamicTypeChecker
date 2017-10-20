@@ -48,8 +48,9 @@ class DynamicTypeChecker {
           this[getPrefix+name] = v;
       } else if(typeof type == "function"){
         let result = v instanceof type; 
-        if(!result)
+        if(!result){
           throw Error(`허용되지 않은 타입입니다. ${type.name} 타입을 입력하세요.`);
+        }
 
         this[getPrefix+name] = v;
       } else {
@@ -61,7 +62,11 @@ class DynamicTypeChecker {
     })
 
     if(data)
-      if(getPrefix)
+      if(getPrefix == ""){
+        name = name.charAt(0).toLowerCase() + name.slice(1)
+        this[getPrefix+name] = data 
+      }
+      else
         this[getPrefix+name] = data
   }
 }
