@@ -27,31 +27,44 @@
 
 class DynamicTypeChecker {
   setType(name, type, data){
-    this.__defineSetter__("set"+name.charAt(0).toUpperCase() + name.slice(1), function(v){
+    let setPrefix = "set";
+    let getPrefix = "get";
+    
+    if(name.startsWith("method")){
+      getPrefix = "";
+      name = name.replace("method","");
+    }
+    name = name.charAt(0).toUpperCase() + name.slice(1)
+
+    this.__defineSetter__(setPrefix+name, function(v){
+      if(getPrefix == "")
+        name = name.charAt(0).toLowerCase() + name.slice(1)
+
       //object, function, 기본 자료형 순서
-      
       if(typeof type == "object"){
         if(typeof v != "object")
           throw Error(`허용되지 않은 타입입니다. Object 타입을 입력하세요.`);
-      
-        this["get"+name.charAt(0).toUpperCase() + name.slice(1)] = v;
+
+          this[getPrefix+name] = v;
       } else if(typeof type == "function"){
         let result = v instanceof type; 
-        
         if(!result)
           throw Error(`허용되지 않은 타입입니다. ${type.name} 타입을 입력하세요.`);
 
-        this["get"+name.charAt(0).toUpperCase() + name.slice(1)] = v;
+        this[getPrefix+name] = v;
       } else {
         if(typeof v != type)
           throw Error(`허용되지 않은 타입입니다. ${type} 타입을 입력하세요.`);
         
-        this["get"+name.charAt(0).toUpperCase() + name.slice(1)] = v;
+        this[getPrefix+name] = v;
       } 
     })
 
+    console.log(getPrefix+name)
+
     if(data)
-      this["set"+name.charAt(0).toUpperCase() + name.slice(1)] = data
+      if(getPrefix)
+        this[getPrefix+name] = data
   }
 }
 

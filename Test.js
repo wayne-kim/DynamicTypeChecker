@@ -16,7 +16,11 @@ class Man extends DynamicTypeChecker {
 }
 
 let man = new Man("김은찬", 26);
-console.log(man)
+
+man.setType("stack", Array);
+man.setStack = [];
+// console.log(man)
+
 // 문자열로 선언됨
 // man.setName = 1 // 정상적으로 에러가 발생해야함
 
@@ -33,18 +37,25 @@ console.log(man)
 // man.setFriend = new Man("wayne", 26);
 // man.setFriend = 1; // 정상적으로 에러가 발생해야함
 
+// 함수 정의
+man.setType("methodshow", Function);
+man.setShow = function(){
+  console.log(this.getName, this.getAge);
+}
+man.show();
+// man.setShow = 1
+
 class Developer extends DynamicTypeChecker {
   constructor(experience){
     super()
 
     this.setType("experience", "number");
-
     this.setExperience = 2;
   }
 }
 
 // Developer로 선언됨
-man.setType("experience", Developer, new Developer(2));
+// man.setType("experience", Developer, new Developer(2));
 // man.setExperience = "1"
 
 /*
@@ -60,16 +71,16 @@ man.setType("experience", Developer, new Developer(2));
   값을 대입할 때에만 타입을 검증하니까.
 */
 
-let iteratorTime = 100000;
-let test1 = {};
-console.time("일반 대입")
-for(let i = 0 ; i < iteratorTime; i++)
-test1.test = i;
-console.timeEnd("일반 대입")
+// let iteratorTime = 100000;
+// let test1 = {};
+// console.time("일반 대입")
+// for(let i = 0 ; i < iteratorTime; i++)
+// test1.test = i;
+// console.timeEnd("일반 대입")
 
-let test2 = new DynamicTypeChecker();
-console.time("대입할 때 마다, 검증")
-test2.setType("test", "number");
-for(let i = 0 ; i < iteratorTime; i++)
-  test2.setTest = i;
-console.timeEnd("대입할 때 마다, 검증");
+// let test2 = new DynamicTypeChecker();
+// console.time("대입할 때 마다, 검증")
+// test2.setType("test", "number");
+// for(let i = 0 ; i < iteratorTime; i++)
+//   test2.setTest = i;
+// console.timeEnd("대입할 때 마다, 검증");
