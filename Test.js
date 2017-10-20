@@ -6,16 +6,17 @@ class Man extends DynamicTypeChecker {
     super();
 
     //타입 정의
-    this.setType("name", "string");
+    this.setType("name", "string", name);
     this.setType("age", "number");
 
     //초기화
-    this.setName = name;
+    // this.setName = name;
     this.setAge = age;
   }
 }
 
 let man = new Man("김은찬", 26);
+console.log(man)
 // 문자열로 선언됨
 // man.setName = 1 // 정상적으로 에러가 발생해야함
 

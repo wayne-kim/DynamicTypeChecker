@@ -26,7 +26,7 @@
 */
 
 class DynamicTypeChecker {
-  setType(name, type){
+  setType(name, type, data){
     this.__defineSetter__("set"+name.charAt(0).toUpperCase() + name.slice(1), function(v){
       //object, function, 기본 자료형 순서
       
@@ -49,6 +49,9 @@ class DynamicTypeChecker {
         this["get"+name.charAt(0).toUpperCase() + name.slice(1)] = v;
       } 
     })
+
+    if(data)
+      this["set"+name.charAt(0).toUpperCase() + name.slice(1)] = data
   }
 }
 
