@@ -13,7 +13,7 @@
 
   #생각2
     Node.js와 같은 스크립트은 컴파일 언어가 아니기 때문에,
-    컴파일 언어가 가지고 있는 장점 중 하나인 타입 체크 기능이 없다는 것이다.
+    컴파일 언어가 가지고 있는 장점 중 하나인 타입 체크 기능이 없다.
     대입할 때 마다, 타입 체크를 하였음에도 불구하고, 직접 확인하지 않으면 결과를 모른다는 큰 단점이 있다.
 
     여기서, 선택 사항은 두 가지라고 생각한다. 타입스크립트와 같은 언어를 선택하거나
@@ -26,7 +26,7 @@
 */
 
 class DynamicTypeChecker {
-  setType(name, type, data){
+  setType(name, type){
     this.__defineSetter__("set"+name.charAt(0).toUpperCase() + name.slice(1), function(v){
       //object, function, 기본 자료형 순서
       
@@ -49,9 +49,6 @@ class DynamicTypeChecker {
         this["get"+name.charAt(0).toUpperCase() + name.slice(1)] = v;
       } 
     })
-
-    if(data)
-      this["set"+name.charAt(0).toUpperCase() + name.slice(1)] = data
   }
 }
 

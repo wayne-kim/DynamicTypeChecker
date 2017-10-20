@@ -9,7 +9,7 @@ class Man extends DynamicTypeChecker {
     this.setType("name", "string");
     this.setType("age", "number");
 
-    // //초기화
+    //초기화
     this.setName = name;
     this.setAge = age;
   }
